@@ -1,0 +1,79 @@
+Here's the clear bullet-point breakdown of what each person does, plus the full VS Code file structure.
+
+Person 1: Core Architecture & Data Layer
+•	Create the Avalonia solution and all folders
+•	Define data models (Airport.cs, Flight.cs, Route.cs, AnalyticsDto.cs)
+•	Load and parse flights.json into usable data
+•	Build data services (FlightDataService.cs, IFlightDataService.cs)
+•	Create reusable methods like GetAirports(), GetFlightsForAirport(), GetRoutesFromAirport()
+•	Set up basic MVVM structure and navigation between views
+•	Write architecture section for README.md
+
+Person 2: View 1 & View 2 (Route + Airport Info)
+•	Build View 1: Route visualization with Mapsui map
+•	Add airport search, selection, and clear buttons for View 1
+•	Show flight routes from selected airport to destinations
+•	Build View 2: Airport flight list with details (flight number, destination, date/time, aircraft, status)
+•	Add flight status filter (Scheduled/Delayed/etc.) for View 2
+•	Create RouteViewModel.cs and AirportInfoViewModel.cs
+•	Connect both views to Person 1's data services
+
+Person 3: View 3, Export & Testing
+•	Build View 3 with 3 analytics charts using LiveCharts2
+•	Write LINQ queries for analytics (busiest routes, top airlines, country traffic)
+•	Create 3 example analytics: time-of-day routes, airline volume, country trends
+•	Implement flight data export (CSV/JSON)
+•	Implement analytics export (CSV/text summary)
+•	Write xUnit tests for ViewModels and LINQ queries
+•	Add testing section to README.md
+
+FlightTrackerApp/
+├── FlightTrackerApp.sln
+├── FlightTrackerApp.csproj
+├── flights.json                      # Data file
+├── README.md                         # Documentation
+├── Page-itslearning.pdf              # Assignment spec
+├── .vscode/
+│   ├── launch.json
+│   ├── tasks.json
+│   └── settings.json
+├── Assets/
+│   ├── Icons/
+│   └── Images/
+├── Models/                           # Person 1
+│   ├── Airport.cs
+│   ├── Flight.cs
+│   ├── Route.cs
+│   └── AnalyticsDto.cs
+├── Services/                         # Person 1 + Person 3 (export)
+│   ├── IFlightDataService.cs
+│   ├── FlightDataService.cs
+│   ├── IExportService.cs
+│   └── ExportService.cs
+├── ViewModels/
+│   ├── MainWindowViewModel.cs
+│   ├── View1/
+│   │   └── RouteViewModel.cs        # Person 2
+│   ├── View2/
+│   │   └── AirportInfoViewModel.cs  # Person 2
+│   └── View3/
+│       └── AnalyticsViewModel.cs    # Person 3
+├── Views/
+│   ├── MainWindow.axaml
+│   ├── MainWindow.axaml.cs
+│   ├── View1/
+│   │   ├── RouteView.axaml          # Person 2
+│   │   └── RouteView.axaml.cs
+│   ├── View2/
+│   │   ├── AirportInfoView.axaml    # Person 2
+│   │   └── AirportInfoView.axaml.cs
+│   └── View3/
+│       ├── AnalyticsView.axaml      # Person 3
+│       └── AnalyticsView.axaml.cs
+└── Tests/                           # Person 3
+    ├── FlightTrackerApp.Tests.csproj
+    ├── ViewModels/
+    │   ├── RouteViewModelTests.cs
+    │   └── AnalyticsViewModelTests.cs
+    └── Services/
+        └── FlightDataServiceTests.cs
